@@ -25,7 +25,7 @@ bool Semaphore::Wait(const std::chrono::duration<R,P>& crRelTime)
       }
       --m_uiCount;
       return true;
-}
+} 
 
 void Semaphore::Signal()
 {

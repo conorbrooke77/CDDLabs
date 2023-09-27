@@ -14,10 +14,13 @@ CFLAGS= -std=c++11 -pthread
 
 helloMake: helloThreads.o Semaphore.o
 	$(CC) -o helloThreads helloThreads.o Semaphore.o $(CFLAGS) $(DEBUGFLAGS)
+	
+mutualMake: mutualEx.o Semaphore.o
+	$(CC) -o mutualExclusion mutualEx.o Semaphore.o $(CFLAGS) $(DEBUGFLAGS)  
 
 DEBUG: DEBUGFLAGS = -DDEBUG
-DEBUG: helloMake
+DEBUG: helloMake mutualMake
 
 #this is customary and just deletes all .o files
 CLEAN:
-	rm *.o
+	rm -f *.o
