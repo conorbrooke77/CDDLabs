@@ -3,38 +3,48 @@
 #include <thread>
 #include <unistd.h>
 
+using namespace std;
+
 /*! displays a message first*/
-void taskOne(std::shared_ptr<Semaphore> theSemaphore, int delay){
+void taskOne(shared_ptr<Semaphore> theSemaphore, int delay){
   sleep(delay);
-  std::cout <<"I ";
-  std::cout << "must ";
-  std::cout << "print ";
-  std::cout << "first"<<std::endl;
+  cout <<"I ";
+  cout << "must ";
+  cout << "print ";
+  cout << "first"<<endl;
+
   //tell taskTwo to start now
+  theSemaphore->Signal();
 }
 
 /*! displays a message second*/
-void taskTwo(std::shared_ptr<Semaphore> theSemaphore){
+void taskTwo(shared_ptr<Semaphore> theSemaphore){
   //wait here until taskOne finishes...
-  std::cout <<"This ";
-  std::cout << "will ";
+  theSemaphore->Wait();
+  
+  cout <<"This ";
+  cout << "will ";
   sleep(5);
-  std::cout << "appear ";
-  std::cout << "second"<<std::endl;
+  cout << "appear ";
+  cout << "second"<<endl;
+  
 }
 
 
 int main(void){
-  std::thread threadOne, threadTwo;
-  std::shared_ptr<Semaphore> sem( new Semaphore);
-  sem->Signal();sem->Wait();//these serve no purpose
+  thread threadOne, threadTwo;
+  shared_ptr<Semaphore> sem( new Semaphore);
+ 
   /**< Launch the threads  */
   int taskOneDelay=5;
-  threadOne=std::thread(taskTwo,sem);
-  threadTwo=std::thread(taskOne,sem,taskOneDelay);
-  std::cout << "Launched from the main\n";
+  
+  threadOne=thread(taskTwo,sem);
+  threadTwo=thread(taskOne,sem,taskOneDelay);
+
    /**< Wait for the threads to finish */
   threadOne.join();
   threadTwo.join();
+
+  cout << "Launched from the main\n";
   return 0;
 }
