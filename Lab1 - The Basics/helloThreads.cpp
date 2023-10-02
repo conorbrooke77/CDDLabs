@@ -7,44 +7,51 @@ using namespace std;
 
 /*! displays a message first*/
 void taskOne(shared_ptr<Semaphore> theSemaphore, int delay){
-  sleep(delay);
+  sleep(delay);  // Adding a delay
+  
+  // Display the first set of messages
   cout <<"I ";
   cout << "must ";
   cout << "print ";
   cout << "first"<<endl;
 
-  //tell taskTwo to start now
+  // Signal to the semaphore that taskOne is done
   theSemaphore->Signal();
 }
 
 /*! displays a message second*/
 void taskTwo(shared_ptr<Semaphore> theSemaphore){
-  //wait here until taskOne finishes...
-  theSemaphore->Wait();
   
+  // Wait until the semaphore gets the signal from taskOne
+  theSemaphore->Wait();
+
+  // Display the second set of messages
   cout <<"This ";
   cout << "will ";
   sleep(5);
   cout << "appear ";
   cout << "second"<<endl;
-  
 }
 
-
 int main(void){
+  // Declare two threads
   thread threadOne, threadTwo;
-  shared_ptr<Semaphore> sem( new Semaphore);
- 
-  /**< Launch the threads  */
+
+  // Create a shared semaphore object
+  shared_ptr<Semaphore> sem(new Semaphore);
+
+  // Set a delay for taskOne
   int taskOneDelay=5;
-  
+
+  // Launch the two tasks as threads
   threadOne=thread(taskTwo,sem);
   threadTwo=thread(taskOne,sem,taskOneDelay);
 
-   /**< Wait for the threads to finish */
+  // Wait until both threads have finished executing
   threadOne.join();
   threadTwo.join();
 
   cout << "Launched from the main\n";
+  
   return 0;
 }

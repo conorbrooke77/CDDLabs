@@ -4,16 +4,29 @@
 #include <iostream>
 
 using namespace std;
+int arrived = 0;
+
 /*! displays the first function in the barrier being executed */
 void task(shared_ptr<Semaphore> mutexSem,shared_ptr<Semaphore> barrierSem, int threadCount){
-
+  
   cout << "first " << endl;
-  //put barrier code here
+  //Rendezvous barrier code
+  mutexSem->Wait();
+  arrived++;
+   
+  if (arrived == threadCount) {
+    for (int i = 0; i < arrived; i++) {
+      barrierSem->Signal();
+    }
+  } else { 
+
+    mutexSem->Signal();
+    barrierSem->Wait();
+    
+  }
+  
   cout << "second" << endl;
 }
-
-
-
 
 int main(void){
   shared_ptr<Semaphore> mutexSem;
@@ -28,7 +41,8 @@ int main(void){
   for(int i=0; i < threadArray.size(); i++){
     threadArray[i]=thread(task,mutexSem,barrierSem,threadCount);
   }
-  
+
+  //Re joins the threads
   for(int i = 0; i < threadArray.size(); i++){
     threadArray[i].join();
   }

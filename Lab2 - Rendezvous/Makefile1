@@ -1,16 +1,23 @@
-#Joseph Kehoe 13/9/2017
-#First simple Makefile
+#Conor Brooke 20/09/22023
 #Used to contain commands to compile projects
-#Equivalent(?) to a project file in VStudio -- only better!
-#See http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/ for info.
-
 
 CC=g++
+#This flag specifies the C++ language standard to be used for compiling the code. This flag also enables support for multithreading with the POSIX thread library.
 CFLAGS= -std=c++11 -pthread
 
-SIMPLE: helloThreads.cpp
-	g++ -std=c++11 -pthread helloThreads.cpp
+#This rule defines how to generate object files (.o) from C++ source files (.cpp). It uses the $(CC) variable for the compiler, -c to indicate compilation without
+#linking, -o to specify the output file, $@ to represent the target (the %.o file being used), and $< to represent the cpp file (the %.cpp file). It also includes
+#$(CFLAGS) and $(DEBUGFLAGS) for compiler flags.
+%.o: %.cpp
+	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
 
 
+rendezvousMake: rendezvous.o Semaphore.o
+	$(CC) -o rendezvous rendezvous.o Semaphore.o $(CFLAGS) $(DEBUGFLAGS)  
+
+DEBUG: DEBUGFLAGS = -DDEBUG
+DEBUG: rendezvous
+
+#this is customary and just deletes all .o files
 CLEAN:
-	rm *.o
+	rm -f *.o
