@@ -1,3 +1,10 @@
+/**
+ * @file SemaphoreExample.cpp
+ * @brief Demonstrates the use of semaphores for thread synchronization.
+ * @author Conor Brooke
+ * @date 30/09/2023
+ */
+
 #include "Semaphore.h"
 #include <iostream>
 #include <thread>
@@ -5,9 +12,14 @@
 
 using namespace std;
 
-/*! displays a message first*/
+/**
+ * @brief Task function that simulates a delay and then displays a message.
+ * 
+ * @param theSemaphore The semaphore used for synchronization.
+ * @param delay The time (in seconds) for which the task waits before printing.
+ */
 void taskOne(shared_ptr<Semaphore> theSemaphore, int delay){
-  sleep(delay);  // Adding a delay
+  sleep(delay);
   
   // Display the first set of messages
   cout <<"I ";
@@ -19,7 +31,11 @@ void taskOne(shared_ptr<Semaphore> theSemaphore, int delay){
   theSemaphore->Signal();
 }
 
-/*! displays a message second*/
+/**
+ * @brief Task function that waits for a semaphore signal and then displays a message.
+ * 
+ * @param theSemaphore The semaphore used for synchronization.
+ */
 void taskTwo(shared_ptr<Semaphore> theSemaphore){
   
   // Wait until the semaphore gets the signal from taskOne
@@ -33,6 +49,11 @@ void taskTwo(shared_ptr<Semaphore> theSemaphore){
   cout << "second"<<endl;
 }
 
+/**
+ * @brief Main function that launches two threads and synchronizes them using semaphores.
+ * 
+ * @return int Returns 0 on successful execution.
+ */
 int main(void){
   // Declare two threads
   thread threadOne, threadTwo;

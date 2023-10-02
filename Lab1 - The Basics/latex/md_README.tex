@@ -1,0 +1,21 @@
+\chapter{Mutual Exclusion and Thread Synchronization Using Semaphores}
+\hypertarget{md_README}{}\label{md_README}\index{Mutual Exclusion and Thread Synchronization Using Semaphores@{Mutual Exclusion and Thread Synchronization Using Semaphores}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+ This lab demonstrates the concepts of mutual exclusion and thread synchronization using semaphores. We explore two main scenarios\+:
+
+
+\begin{DoxyEnumerate}
+\item Synchronizing two threads so that one thread prints its messages before the other.
+\item Ensuring that only one of many threads can update a shared variable at a given time, demonstrating mutual exclusion.
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Description}{Description}}\label{md_README_autotoc_md1}
+\hypertarget{md_README_autotoc_md2}{}\doxysubsection{\texorpdfstring{1. Semaphore-\/based Synchronization}{1. Semaphore-based Synchronization}}\label{md_README_autotoc_md2}
+Two threads are launched\+: one displaying a message after a delay and another displaying its message upon receiving a signal from the first thread. This ensures that the messages are always printed in the correct order, regardless of how the threads are scheduled.\hypertarget{md_README_autotoc_md3}{}\doxysubsection{\texorpdfstring{2. Mutual Exclusion with a Shared Variable}{2. Mutual Exclusion with a Shared Variable}}\label{md_README_autotoc_md3}
+A large number of threads ({\ttfamily num\+\_\+threads}) are launched concurrently. Each thread increments a shared variable multiple times. A semaphore ensures mutual exclusion so that only one thread updates the shared variable at any given moment. After all threads have finished, the shared variable\textquotesingle{}s final value shows the succussful implementation of mutual exclusion.\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md_README_autotoc_md4}
+
+\begin{DoxyEnumerate}
+\item Compile the program using the provided Makefile, {\ttfamily Mainmake}\+: make -\/f Main\+Make
+\end{DoxyEnumerate}\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{License}{License}}\label{md_README_autotoc_md5}
+This project is licensed under the GNU General Public License (GPL). See the \href{https://www.gnu.org/licenses/gpl-3.0.en.html}{\texttt{ LICENSE}} file for details.\hypertarget{md_README_autotoc_md6}{}\doxysection{\texorpdfstring{Author}{Author}}\label{md_README_autotoc_md6}
+{\bfseries{Conor Brooke}} Email\+: \href{mailto:conorbrooke19@gmail.com}{\texttt{ conorbrooke19@gmail.\+com}}\hypertarget{md_README_autotoc_md7}{}\doxysection{\texorpdfstring{Repository}{Repository}}\label{md_README_autotoc_md7}
+Git URL\+: \href{https://github.com/conorbrooke77/Concurrent-Programming-Labs/tree/main/Lab1\%20-\%20The\%20Basics}{\texttt{ https\+://github.\+com/conorbrooke77/}} 

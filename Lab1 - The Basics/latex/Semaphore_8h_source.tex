@@ -1,0 +1,29 @@
+\doxysection{Semaphore.\+h}
+\hypertarget{Semaphore_8h_source}{}\label{Semaphore_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ SEMAPHORE\_H}}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ SEMAPHORE\_H\ }}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00014}\mbox{\hyperlink{classSemaphore}{00014}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSemaphore}{Semaphore}}}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00016}00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_uiCount;\ }
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00018}00018\ \ \ \ \ std::mutex\ m\_mutex;}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00019}00019\ \ \ \ \ std::condition\_variable\ m\_condition;}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00021}00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{classSemaphore}{Semaphore}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ uiCount=0)}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ :\ m\_uiCount(uiCount)\ \{\ \};}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00024}00024\ \ \ \ \ \textcolor{keywordtype}{void}\ Wait();}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{template}<\ \textcolor{keyword}{typename}\ R,\textcolor{keyword}{typename}\ P\ >}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ Wait(\textcolor{keyword}{const}\ std::chrono::duration<R,P>\&\ crRelTime);}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{void}\ Signal();}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00029}00029\ \};}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00031}00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Semaphore_8h_source_l00032}00032\ }
+
+\end{DoxyCode}
